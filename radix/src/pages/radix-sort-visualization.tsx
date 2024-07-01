@@ -138,28 +138,28 @@ const RadixSortVisualization = () => {
             onChange={(e) => setSpeed(parseInt(e.target.value))}
             className="w-32 mr-2"
           />
-          <span>Speed: {speed}x</span>
+          <span className="text-black">Speed: {speed}x</span>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <h3 className="font-bold">Main Queue (Q)</h3>
-            <div className="border p-2 min-h-[50px]">
+            <h3 className="font-bold text-black">Main Queue (Q)</h3>
+            <div className="border p-2 min-h-[50px] text-black">
               {mainQueue.join(', ')}
             </div>
           </div>
           <div>
-            <h3 className="font-bold">Sub Queues</h3>
+            <h3 className="font-bold text-black">Sub Queues</h3>
             {subQueues.map((queue, index) => (
-              <div key={index} className="border p-1 mb-1">
+              <div key={index} className="border p-1 mb-1 text-black">
                 Q{index}: {queue.join(', ')}
               </div>
             ))}
           </div>
         </div>
         <div className="mt-4">
-          <p>n: {n}, d: {d}, i: {i}, j: {j}</p>
-          <p>Current Element: {currentElement !== null ? currentElement : 'N/A'}</p>
-          <p>Phase: {phase}</p>
+          <p className="text-black">n: {n}, d: {d}, i: {i}, j: {j}</p>
+          <p className="text-black">Current Element: {currentElement !== null ? currentElement : 'N/A'}</p>
+          <p className="text-black">Phase: {phase}</p>
         </div>
       </div>
     </div>

@@ -118,7 +118,7 @@ const QuicksortVisualization = () => {
   return (
     <div className="p-4 max-w-4xl mx-auto">
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-        <h2 className="text-2xl font-bold mb-4">Quick Sort Visualization</h2>
+        <h2 className="text-2xl font-bold mb-4 text-black">Quick Sort Visualization</h2>
         <div className="p-4 max-w-3xl mx-auto">
           <input
             type="text"
@@ -132,7 +132,7 @@ const QuicksortVisualization = () => {
             <div className="flex justify-center overflow-x-auto">
               {array.map((num, index) => (
                 <div key={index} className="flex flex-col items-center mx-1">
-                  <div className={`w-10 h-10 border flex items-center justify-center ${
+                  <div className={`w-10 h-10 border text-black flex items-center justify-center ${
                     (index >= low && index <= high) ? 'bg-yellow-100' : ''
                   }`}>
                     {num}
@@ -162,7 +162,7 @@ const QuicksortVisualization = () => {
               onChange={(e) => setSpeed(parseInt(e.target.value))}
               className="w-48"
             />
-            <span>Speed: {speed}x</span>
+            <span className="text-black">Speed: {speed}x</span>
           </div>
         </div>
       </div>
