@@ -46,20 +46,18 @@ const RadixSortVisualization = () => {
 
   const runStep = () => {
     if (currentStep === 0) {
-      setI(0);
+      setI(d - 1);
       setJ(0);
       setPhase('decomposition');
-    } else if (i < d) {
+    } else if (i >= 0) {
       if (phase === 'decomposition') {
         if (mainQueue.length > 0) {
           const x = mainQueue.shift();
           setCurrentElement(x);
 
-          let numberString = x.toString();
-          // Calculate the index from the right
+          let numberString = x.toString().padStart(d, '0');
           console.log('numberString:', numberString);
-          // const digit = Math.floor(x / Math.pow(baseB, i)) % baseB;
-          const digit = parseInt(i <= numberString.length - 1 ? numberString[i] : 0);
+          const digit = parseInt(numberString[i]);
           console.log('digit:', digit);
           const newSubQueues = [...subQueues];
           newSubQueues[digit].push(x);
@@ -79,7 +77,7 @@ const RadixSortVisualization = () => {
             setJ(j + 1);
           }
         } else {
-          setI(i + 1);
+          setI(i - 1);
           setPhase('decomposition');
         }
       }
