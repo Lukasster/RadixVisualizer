@@ -86,7 +86,7 @@ const QuicksortVisualization = () => {
       timer = setTimeout(quicksortStep, 1000 / speed);
     }
     return () => clearTimeout(timer);
-  }, [isRunning, array, stack, speed]);
+  }, [isRunning, array, stack, speed, i, j, pivotIndex, low, high]);
 
   const toggleSimulation = () => {
     if (!isRunning && array.length === 0) {
