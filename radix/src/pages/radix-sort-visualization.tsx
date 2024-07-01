@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState, useEffect } from 'react';
 import { Play, Pause, StepForward } from 'lucide-react';
@@ -7,8 +6,8 @@ const RadixSortVisualization = () => {
   const [inputArray, setInputArray] = useState('752,11111,12,160');
   const [baseB, setBaseB] = useState(8);
   const [baseInputError, setBaseInputError] = useState('');
-  const [mainQueue, setMainQueue] = useState([]);
-  const [subQueues, setSubQueues] = useState([]);
+  const [mainQueue, setMainQueue] = useState<number[]>([]);
+  const [subQueues, setSubQueues] = useState<number[][]>([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [speed, setSpeed] = useState(1);
@@ -16,7 +15,7 @@ const RadixSortVisualization = () => {
   const [d, setD] = useState(0);
   const [i, setI] = useState(0);
   const [j, setJ] = useState(0);
-  const [currentElement, setCurrentElement] = useState(null);
+  const [currentElement, setCurrentElement] = useState<number | null>(null);
   const [phase, setPhase] = useState('decomposition');
 
   const validateAndSetBase = (value: any) => {
@@ -36,7 +35,7 @@ const RadixSortVisualization = () => {
     setMainQueue(array);
     setN(array.length);
     setD(array.length > 0 ? Math.max(...array.map(num => Math.floor(Math.log(Math.max(1, num)) / Math.log(baseB)) + 1)) : 0);
-    setSubQueues(Array(baseB).fill(NaN).map(() => []));
+    setSubQueues(Array(baseB).fill(0).map(() => []));
     setI(0);
     setJ(0);
     setPhase('decomposition');
@@ -52,7 +51,7 @@ const RadixSortVisualization = () => {
     } else if (i >= 0) {
       if (phase === 'decomposition') {
         if (mainQueue.length > 0) {
-          const x = mainQueue.shift();
+          const x = mainQueue.shift()!;
           setCurrentElement(x);
 
           let numberString = x.toString().padStart(d, '0');
@@ -70,7 +69,7 @@ const RadixSortVisualization = () => {
       } else { // collection phase
         if (j < baseB) {
           if (subQueues[j].length > 0) {
-            const x = subQueues[j].shift();
+            const x = subQueues[j].shift()!;
             setMainQueue([...mainQueue, x]);
             setSubQueues([...subQueues]);
           } else {

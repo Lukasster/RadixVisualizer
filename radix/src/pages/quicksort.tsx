@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+type StackElement = { low: number; high: number };
+
 const QuicksortVisualization = () => {
-  const [array, setArray] = useState([]);
+  const [array, setArray] = useState<number[]>([]);
   const [input, setInput] = useState('');
   const [pivotIndex, setPivotIndex] = useState(-1);
   const [i, setI] = useState(-1);
@@ -10,14 +12,14 @@ const QuicksortVisualization = () => {
   const [speed, setSpeed] = useState(1);
   const [low, setLow] = useState(-1);
   const [high, setHigh] = useState(-1);
-  const [stack, setStack] = useState([]);
+  const [stack, setStack] = useState<StackElement[]>([]);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInput(e.target.value);
     loadArray(e.target.value);
   };
 
-  const loadArray = (inputValue) => {
+  const loadArray = (inputValue: string) => {
     const newArray = inputValue.split(',').map(num => parseInt(num.trim())).filter(num => !isNaN(num));
     setArray(newArray);
     setStack([{ low: 0, high: newArray.length - 1 }]);
@@ -96,9 +98,7 @@ const QuicksortVisualization = () => {
   };
 
   const stepQuicksort = () => {
-    // if (!isRunning) {
-      quicksortStep();
-    // }
+    quicksortStep();
   };
 
   return (
