@@ -3,8 +3,8 @@ import React, { useState, useEffect } from 'react';
 type StackElement = { low: number; high: number };
 
 const QuicksortVisualization = () => {
-  const [array, setArray] = useState<number[]>([]);
-  const [input, setInput] = useState('');
+  const [array, setArray] = useState<number[]>([4,3,2,1,6,7]);
+  const [input, setInput] = useState('4,3,2,1,6,7');
   const [pivotIndex, setPivotIndex] = useState(-1);
   const [i, setI] = useState(-1);
   const [j, setJ] = useState(-1);
@@ -125,7 +125,7 @@ const QuicksortVisualization = () => {
             value={input}
             onChange={handleInputChange}
             placeholder="Enter array as comma-separated list"
-            className="mb-4 p-2 w-4/5 border rounded"
+            className="mb-4 p-2 w-4/5 border rounded text-black"
           />
 
           <div className="mb-4">
