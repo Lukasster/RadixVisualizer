@@ -24,10 +24,10 @@ const QuicksortVisualization = () => {
     setArray(newArray);
     setStack([{ low: 0, high: newArray.length - 1 }]);
     setI(-1);
-    setJ(0);
-    setPivotIndex(newArray.length - 1);
-    setLow(0);
-    setHigh(newArray.length - 1);
+    setJ(-1);
+    setPivotIndex(-1);
+    setLow(-1);
+    setHigh(-1);
     setIsRunning(false);
   };
 
@@ -38,19 +38,21 @@ const QuicksortVisualization = () => {
 
     let { low, high } = stack[0];
     let arrayCopy = [...array];
-    let pivotIndex = high;
+    let pivot = arrayCopy[high];
 
-    if (j < pivotIndex) {
-      if (arrayCopy[j] <= arrayCopy[pivotIndex]) {
+    if (i === -1 && j === -1) {
+      setI(low - 1);
+      setJ(low);
+      setPivotIndex(high);
+    } else if (j < high) {
+      if (arrayCopy[j] <= pivot) {
         setI(i + 1);
         [arrayCopy[i + 1], arrayCopy[j]] = [arrayCopy[j], arrayCopy[i + 1]];
         setArray(arrayCopy);
-        setJ(j + 1);
-      } else {
-        setJ(j + 1);
       }
+      setJ(j + 1);
     } else {
-      [arrayCopy[i + 1], arrayCopy[pivotIndex]] = [arrayCopy[pivotIndex], arrayCopy[i + 1]];
+      [arrayCopy[i + 1], arrayCopy[high]] = [arrayCopy[high], arrayCopy[i + 1]];
       setArray(arrayCopy);
       setPivotIndex(i + 1);
       setStack([
@@ -61,24 +63,36 @@ const QuicksortVisualization = () => {
       setLow(-1);
       setHigh(-1);
       setI(-1);
-      setJ(0);
+      setJ(-1);
     }
   };
 
   const quicksortStep = () => {
-    if(stack.length === 0) {
+    if (stack.length === 0) {
+      setIsRunning(false);
       return;
     }
 
     let { low, high } = stack[0];
 
     if (low < high) {
-      setLow(low);
-      setHigh(high);
-      setPivotIndex(high);
+      if (low !== -1 && high !== -1) {
+        setLow(low);
+        setHigh(high);
+        if (i === -1 && j === -1) {
+          setPivotIndex(high);
+          setI(low - 1);
+          setJ(low);
+        }
+      }
       partitionStep();
     } else {
       setStack(stack.slice(1));
+      setLow(-1);
+      setHigh(-1);
+      setI(-1);
+      setJ(-1);
+      setPivotIndex(-1);
     }
   };
 
@@ -114,19 +128,23 @@ const QuicksortVisualization = () => {
             className="mb-4 p-2 w-4/5 border rounded"
           />
 
-          <div className="mb-4 flex justify-center overflow-x-auto">
-            {array.map((num, index) => (
-              <div key={index} className="flex flex-col items-center mx-1">
-                <div className="w-10 h-10 border flex items-center justify-center">
-                  {num}
+          <div className="mb-4">
+            <div className="flex justify-center overflow-x-auto">
+              {array.map((num, index) => (
+                <div key={index} className="flex flex-col items-center mx-1">
+                  <div className={`w-10 h-10 border flex items-center justify-center ${
+                    (index >= low && index <= high) ? 'bg-yellow-100' : ''
+                  }`}>
+                    {num}
+                  </div>
+                  <div className="h-6 flex items-start mt-1">
+                    {index === i && <span className="text-red-500">↑i</span>}
+                    {index === j && <span className="text-blue-500">↑j</span>}
+                    {index === pivotIndex && <span className="text-green-500">↑p</span>}
+                  </div>
                 </div>
-                <div className="h-6 flex items-start mt-1">
-                  {index === i && <span className="text-red-500">↑i</span>}
-                  {index === j && <span className="text-blue-500">↑j</span>}
-                  {index === pivotIndex && <span className="text-green-500">↑p</span>}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
 
           <div className="flex justify-center gap-4 mb-4">

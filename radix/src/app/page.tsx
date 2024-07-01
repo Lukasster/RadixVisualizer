@@ -13,7 +13,6 @@ export default function Home() {
       <NavBar setPage={setPage} />
       {page === 'quicksort' && <QuickSortVisualizer />}
       {page === 'radixsort' && <RadixSortVisualization />}
-      (c) Lukas Sterbenz
     </div>
   );
 }
