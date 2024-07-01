@@ -11,6 +11,7 @@ export default function Home() {
 
   return (
     <div>
+      <Analytics />
       <NavBar setPage={setPage} />
       {page === 'quicksort' && <QuickSortVisualizer />}
       {page === 'radixsort' && <RadixSortVisualization />}
