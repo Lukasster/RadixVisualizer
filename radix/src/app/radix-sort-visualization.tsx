@@ -54,7 +54,13 @@ const RadixSortVisualization = () => {
         if (mainQueue.length > 0) {
           const x = mainQueue.shift();
           setCurrentElement(x);
-          const digit = Math.floor(x / Math.pow(baseB, i)) % baseB;
+
+          let numberString = x.toString();
+          // Calculate the index from the right
+          console.log('numberString:', numberString);
+          // const digit = Math.floor(x / Math.pow(baseB, i)) % baseB;
+          const digit = parseInt(i <= numberString.length - 1 ? numberString[i] : 0);
+          console.log('digit:', digit);
           const newSubQueues = [...subQueues];
           newSubQueues[digit].push(x);
           setSubQueues(newSubQueues);
