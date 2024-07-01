@@ -19,7 +19,7 @@ const RadixSortVisualization = () => {
   const [currentElement, setCurrentElement] = useState(null);
   const [phase, setPhase] = useState('decomposition');
 
-  const validateAndSetBase = (value) => {
+  const validateAndSetBase = (value: any) => {
     const parsedValue = parseInt(value);
     if (isNaN(parsedValue) || parsedValue < 2) {
       setBaseInputError('Base must be an integer greater than 1');
@@ -36,7 +36,7 @@ const RadixSortVisualization = () => {
     setMainQueue(array);
     setN(array.length);
     setD(array.length > 0 ? Math.max(...array.map(num => Math.floor(Math.log(Math.max(1, num)) / Math.log(baseB)) + 1)) : 0);
-    setSubQueues(Array(baseB).fill().map(() => []));
+    setSubQueues(Array(baseB).fill(NaN).map(() => []));
     setI(0);
     setJ(0);
     setPhase('decomposition');
